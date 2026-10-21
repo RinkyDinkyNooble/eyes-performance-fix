@@ -4,7 +4,7 @@ A companion mod for The eYes Remastered 1.3.0 (Forge 1.20.1) that makes its mobs
 
 ## Before And After
 
-In singleplayer it shows on screen too: **12 FPS** without the patch, about **130 FPS** with it (counter in the top left). The two screenshots aren't from exactly the same spot, since the eYes move around and keep spawning, but they're from the same fight.
+A big eYes fight in singleplayer: **12 FPS** without the patch, about **130 FPS** with it (counter in the top left). The two screenshots aren't from exactly the same spot, since the eYes move around and keep spawning, but they're from the same fight.
 
 Without:
 
