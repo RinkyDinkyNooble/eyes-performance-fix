@@ -1,1 +1,1 @@
-Cuts the server cost of The eYes Are Back's mobs, satellites, trees and eYe Soil, with the same gameplay.
+Big The eYes Are Back fights back at 20 TPS: cuts the server time of the eYes' own code by about 7 times, with the same gameplay.
