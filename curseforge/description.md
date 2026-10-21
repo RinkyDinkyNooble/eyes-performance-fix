@@ -4,11 +4,21 @@ A companion mod for The eYes Are Back 1.3.0 (Forge 1.20.1) that makes its mobs, 
 
 ## Before And After
 
-A big fight on Cinder, a planet in the ABZA modpack: about 90 eYes before and about 110 after, with a third-stage satellite and tree, one player, the same spot.
+A big fight on Cinder, a planet in the ABZA modpack: about 90 eYes before and about 110 after, with a third-stage satellite and tree and one player.
 
 - Without the patch the server ran at **16.4 TPS**, working 51 ms on each tick (the budget is 50).
 - With it, a steady **20 TPS**, working 8 ms on each tick. Its slowest ticks (95th percentile) went from 168 ms to 9.5 ms.
 - The eYes' own code went from 18.2 s of every 30 s of server time to 2.5 s.
+
+In singleplayer it shows on screen too: **12 FPS** without the patch, about **130 FPS** with it (counter in the top left). The two screenshots aren't from exactly the same spot, since the eYes move around and keep spawning, but they're from the same fight.
+
+Without:
+
+![A big eYes fight without the patch, 12 FPS](https://raw.githubusercontent.com/RinkyDinkyNooble/eyes-performance-fix/main/curseforge/images/Before.png)
+
+With:
+
+![The same fight with the patch, about 130 FPS](https://raw.githubusercontent.com/RinkyDinkyNooble/eyes-performance-fix/main/curseforge/images/After.png)
 
 ## Faster
 
