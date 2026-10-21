@@ -1,1 +1,1 @@
-Big The eYes Are Back fights back at 20 TPS: cuts the server time of the eYes' own code by about 7 times, with the same gameplay.
+A performance patch for The eYes Remastered. 
