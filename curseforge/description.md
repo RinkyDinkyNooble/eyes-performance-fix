@@ -1,6 +1,6 @@
 # eYes Performance Fix (Unofficial Patch)
 
-A companion mod for The eYes Remastered 1.3.0 (Forge 1.20.1) that makes its mobs, satellites, trees and eYe Soil much cheaper for the server, with the same results. The eYes Are Back itself is still required.
+A companion mod for The eYes Remastered 1.3.0 (Forge 1.20.1) that makes its mobs, satellites, trees and eYe Soil much cheaper for the server, with the same results. The eYes Remastered itself is still required.
 
 ## Before And After
 

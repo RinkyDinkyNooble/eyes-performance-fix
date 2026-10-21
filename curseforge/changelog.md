@@ -2,7 +2,7 @@
 
 ## 1.0.0 (2026-10-16)
 
-First version, for Minecraft 1.20.1, Forge 47 and The eYes Are Back 1.3.0.
+First version, for Minecraft 1.20.1, Forge 47 and The eYes Remastered 1.3.0.
 
 - Faster: each eYe's target search only checks line of sight to the entities that could change its target, and skips the search when it's already after a player.
 - Faster: third-stage satellites and trees only give their effects again when a mob's copy is close to running out, so Forge's effect events (and every mod listening to them) run about a quarter as often.
