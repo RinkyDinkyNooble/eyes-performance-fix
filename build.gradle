@@ -1,0 +1,112 @@
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'org.spongepowered.mixin' version '0.7.+'
+}
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = mod_id
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
+
+minecraft {
+    mappings channel: 'official', version: minecraft_version
+
+    runs {
+        configureEach {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'info'
+            mods {
+                "${mod_id}" {
+                    source sourceSets.main
+                }
+            }
+        }
+        server {
+            args '--nogui'
+        }
+    }
+}
+
+mixin {
+    add sourceSets.main, "${mod_id}.refmap.json"
+    config "${mod_id}.mixins.json"
+}
+
+repositories {
+    // The eYes jar is read from libs/ (see README).
+    flatDir { dir 'libs' }
+}
+
+// Dev-only check commands (src/verify), built into their own jar, which never ships.
+sourceSets {
+    verify {
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+    }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    // Compiled against so the mixin processor can check the targets. Never packed into this mod's jar.
+    compileOnly fg.deobf("local:the_eyes_are_back:${eyes_version}")
+    verifyCompileOnly fg.deobf("local:the_eyes_are_back:${eyes_version}")
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    var replaceProperties = [
+            minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
+            forge_version: forge_version, forge_version_range: forge_version_range,
+            loader_version_range: loader_version_range,
+            eyes_version_range: eyes_version_range,
+            mod_id: mod_id, mod_name: mod_name, mod_license: mod_license,
+            mod_version: mod_version, mod_authors: mod_authors, mod_description: mod_description,
+            mod_url: mod_url, mod_issues: mod_issues,
+    ]
+    inputs.properties replaceProperties
+    filesMatching(['META-INF/mods.toml']) {
+        expand replaceProperties + [project: project]
+    }
+}
+
+tasks.named('jar', Jar).configure {
+    manifest {
+        attributes([
+                'Specification-Title'     : mod_id,
+                'Specification-Vendor'    : mod_authors,
+                'Specification-Version'   : '1',
+                'Implementation-Title'    : project.name,
+                'Implementation-Version'  : project.version,
+                'Implementation-Vendor'   : mod_authors,
+                'MixinConfigs'            : "${mod_id}.mixins.json",
+        ])
+    }
+    // Ship the license inside the jar too.
+    from('LICENSE') {
+        rename { "LICENSE_${mod_id}" }
+    }
+    finalizedBy 'reobfJar'
+}
+
+tasks.register('verifyJar', Jar) {
+    from sourceSets.verify.output
+    archiveClassifier = 'verify'
+    finalizedBy 'reobfVerifyJar'
+}
+
+reobf {
+    verifyJar {}
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

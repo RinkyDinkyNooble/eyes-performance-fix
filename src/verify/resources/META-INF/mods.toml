@@ -1,0 +1,16 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="0BSD"
+
+[[mods]]
+modId="eyesperformancefix_verify"
+version="0.0.0"
+displayName="eYes Performance Fix: dev checks"
+description='''Dev-only check commands for eYes Performance Fix. Never shipped.'''
+
+[[dependencies.eyesperformancefix_verify]]
+    modId="eyesperformancefix"
+    mandatory=true
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="BOTH"
